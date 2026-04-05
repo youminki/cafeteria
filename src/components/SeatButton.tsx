@@ -1,8 +1,10 @@
+import type { Key } from 'react';
 import { motion } from 'motion/react';
 import { Seat } from '../lib/types';
 import { getSeatColor } from '../lib/utils';
 
 interface SeatButtonProps {
+  key?: Key;
   seat: Seat;
   onClick: (seat: Seat) => void;
 }

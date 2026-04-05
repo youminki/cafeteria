@@ -1,15 +1,15 @@
-import { useState, useMemo, useEffect } from 'react';
-import { INITIAL_SEATS } from './lib/constants';
-import { Seat, SeatStatus, UserInfo } from './lib/types';
-import { computeStats } from './lib/utils';
-import { Header } from './components/Header';
-import { Login } from './components/Login';
-import { StatsBar } from './components/StatsBar';
-import { SeatMap } from './components/SeatMap';
-import { SeatModal } from './components/SeatModal';
-import { Sidebar } from './components/Sidebar';
+import { useState, useMemo, useEffect } from "react";
+import { INITIAL_SEATS } from "./lib/constants";
+import { Seat, SeatStatus, UserInfo } from "./lib/types";
+import { computeStats } from "./lib/utils";
+import { Header } from "./components/Header";
+import { Login } from "./components/Login";
+import { StatsBar } from "./components/StatsBar";
+import { SeatMap } from "./components/SeatMap";
+import { SeatModal } from "./components/SeatModal";
+import { Sidebar } from "./components/Sidebar";
 
-const STORAGE_KEY = 'cafeteria_user';
+const STORAGE_KEY = "cafeteria_user";
 
 function loadUser(): UserInfo | null {
   try {
@@ -24,7 +24,7 @@ export default function App() {
   const [user, setUser] = useState<UserInfo | null>(loadUser);
   const [seats, setSeats] = useState<Seat[]>(INITIAL_SEATS);
   const [selectedSeat, setSelectedSeat] = useState<Seat | null>(null);
-  const [view, setView] = useState<'map' | 'dashboard'>('map');
+  const [view, setView] = useState<"map" | "dashboard">("map");
 
   useEffect(() => {
     if (user) {
@@ -37,11 +37,20 @@ export default function App() {
   const stats = useMemo(() => computeStats(seats), [seats]);
 
   const handleSeatAction = (seatId: string, action: SeatStatus) => {
-    setSeats(prev => prev.map(s => s.id === seatId ? {
-      ...s,
-      status: action,
-      userNickname: action === 'available' ? undefined : (user?.nickname ?? undefined),
-    } : s));
+    setSeats((prev) =>
+      prev.map((s) =>
+        s.id === seatId
+          ? {
+              ...s,
+              status: action,
+              userNickname:
+                action === "available"
+                  ? undefined
+                  : (user?.nickname ?? undefined),
+            }
+          : s,
+      ),
+    );
     setSelectedSeat(null);
   };
 
@@ -67,7 +76,7 @@ export default function App() {
           availableSeats={stats.availableSeats}
         />
 
-        {view === 'map' ? (
+        {view === "map" ? (
           <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
             <div className="lg:col-span-3">
               <SeatMap seats={seats} onSeatClick={setSelectedSeat} />
@@ -83,7 +92,9 @@ export default function App() {
             </div>
             <div className="lg:col-span-1">
               <div className="bg-white p-8 border border-slate-200 shadow-sm">
-                <h3 className="text-xl font-bold mb-6 uppercase tracking-tighter">시스템 정보</h3>
+                <h3 className="text-xl font-bold mb-6 uppercase tracking-tighter">
+                  시스템 정보
+                </h3>
                 <div className="space-y-4 text-xs font-bold text-slate-500 uppercase tracking-widest leading-relaxed">
                   <p>• 본 시스템은 실시간 좌석 현황을 제공합니다.</p>
                   <p>• 예약은 최대 10분간 유지됩니다.</p>

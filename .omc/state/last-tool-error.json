@@ -1,0 +1,7 @@
+{
+  "tool_name": "Bash",
+  "tool_input_preview": "{\"command\":\"npx tsc --noEmit 2>&1\",\"timeout\":30000,\"description\":\"Type-check all changes\"}",
+  "error": "Exit code 2\nsrc/main.tsx(7,38): error TS2339: Property 'env' does not exist on type 'ImportMeta'.",
+  "timestamp": "2026-04-05T07:58:03.568Z",
+  "retry_count": 1
+}
